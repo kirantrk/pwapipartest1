@@ -1,0 +1,25 @@
+{
+  "name": "playwright-api-practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:booker": "playwright test --project=booker",
+    "test:smoke": "playwright test --project=booker --grep \"@smoke\"",
+    "test:negative": "playwright test --project=booker --grep \"@negative\"",
+    "test:no-negative": "playwright test --project=booker --grep-invert \"@negative\"",
+    "report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "zod": "^4.6.7"
+  }
+}
