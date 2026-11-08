@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { BookingClient } from "./booking-client";
-import { Booking, CreateBookingResponse, newBooking } from "./types";
+import { BookingClient } from "../src/booking-client"
+import { Booking, CreateBookingResponse, newBooking } from "../src/types";
 
 // Shared by every test in this file. beforeEach fills it, because the
 // `request` fixture only exists inside a test or a hook.
