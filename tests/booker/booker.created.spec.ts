@@ -1,5 +1,7 @@
-import { test, expect } from "../tests/src/fixtures";
-import { newBooking } from "./src/types";
+// import { test, expect } from "../tests/src/fixtures";
+
+import {test , expect} from "../src/fixtures"
+import { newBooking } from "../src/types";
 
 test("GET /booking/:id returns the created booking", async ({
   client,

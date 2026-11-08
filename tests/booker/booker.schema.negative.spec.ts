@@ -1,11 +1,13 @@
-import { test, expect } from "./src/fixtures";
-import { newBooking } from "./src/types";
+// import { test, expect } from "./src/fixtures";
+
+import {test,expect} from "../src/fixtures"
+import { newBooking } from "../src/types";
 import {
   BookingSchema,
   AuthResponseSchema,
   AuthErrorSchema,
   BookingIdListSchema,
-} from "./src/schemas";
+} from "../src/schemas";
 
 // Test 1: login success. Never print or assert the token's value.
 test(
