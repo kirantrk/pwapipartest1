@@ -1,46 +1,24 @@
-import { defineConfig, devices } from "@playwright/test";
+import "dotenv/config"; // loads .env into process.env (locally; CI uses secrets)
+import { defineConfig } from "@playwright/test";
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
-// export default defineConfig({
-//   testDir: './tests',
-//   /* Run tests in files in parallel */
-//   fullyParallel: true,
-//   /* Fail the build on CI if you accidentally left test.only in the source code. */
-//   forbidOnly: !!process.env.CI,
-//   /* Retry on CI only */
-//   retries: process.env.CI ? 2 : 0,
-//   /* Opt out of parallel tests on CI. */
-//   workers: process.env.CI ? 1 : undefined,
-//   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-//   reporter: 'html',
-//   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-//   use: {
-//     /* Base URL to use in actions like `await page.goto('')`. */
-//     // baseURL: 'http://localhost:3000',
-
-//     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-//     trace: 'on-first-retry',
-//   },
+const isCI = !!process.env.CI; // GitHub Actions sets CI=true automatically
 
 export default defineConfig({
-  testDir: "./tests",
-  reporter: [["list"], ["html", { open: "never" }]],
-  use: {
-    baseURL: "https://jsonplaceholder.typicode.com",
-    extraHTTPHeaders: { Accept: "application/json" },
-  },
+  // A stray test.only fails the build on CI instead of silently skipping tests
+  forbidOnly: isCI,
 
-  /* Configure projects for major browsers */
+  // One retry on CI only, since public APIs can have a slow or flaky moment
+  retries: isCI ? 1 : 0,
+
+  // Fixed worker count on CI for predictable runs; default locally
+  workers: isCI ? 2 : undefined,
+
+  // "github" adds inline failure annotations on pull requests
+  reporter: isCI
+    ? [["list"], ["github"], ["html", { open: "never" }]]
+    : [["list"], ["html", { open: "never" }]],
+
+  // No top-level testDir or use: each project owns its folder and baseURL
   projects: [
     {
       name: "jsonplaceholder",
@@ -60,14 +38,7 @@ export default defineConfig({
     },
     {
       name: "auth",
-      testDir: "./tests/auth",
+      testDir: "./tests/auth", // full URLs in these tests, so no baseURL
     },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
