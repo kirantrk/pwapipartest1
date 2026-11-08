@@ -1,7 +1,7 @@
 import {test , expect} from "@playwright/test"
-import { createMockOAuth } from './helpers/mock-oauth-server'
+import { createMockOAuth } from '../helpers/mock-oauth-server'
 
-import { OAuthClient } from "./src/oauth-client"
+import { OAuthClient } from "../src/oauth-client"
 
 const mock = createMockOAuth(4010,3)
 

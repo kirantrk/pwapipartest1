@@ -1,6 +1,6 @@
-import { test, expect } from "../tests/src/fixtures";
-import { newBooking } from "./src/types";
-import { BookingSchema, CreateBookingResponseSchema } from "./src/schemas";
+import { test, expect } from "../src/fixtures";
+import { newBooking } from "../src/types";
+import { BookingSchema, CreateBookingResponseSchema } from "../src/schemas";
 
 
 test('GET /booking/:id matches BookingSchema', async ({ client, createdBooking }) => {

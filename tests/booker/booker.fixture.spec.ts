@@ -1,5 +1,5 @@
-import {test,expect} from "../tests/src/fixtures"
-import {newBooking} from '../tests/src/types'
+import {test,expect} from "../src/fixtures"
+import {newBooking} from '../src/types'
 test('POST /booking creates a booking', async ({ client }) => {
   const booking = newBooking();
 
