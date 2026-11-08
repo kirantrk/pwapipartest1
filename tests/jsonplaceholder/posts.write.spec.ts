@@ -39,7 +39,7 @@ test("GET POST BY PARAMS", async ({ request }) => {
     title: string;
     body: string;
   }
-  const response = await request.get("/posts", { params: { userID: 1 } });
+  const response = await request.get("/posts", { params: { userId: 1 } });
   console.log(response.url());
   expect(response.status()).toBe(200);
   const posts: Post[] = await response.json();
